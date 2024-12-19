@@ -1,97 +1,112 @@
-# 📊 EduStats
+# 📊 **EduStats: Academic Performance Analyzer**
 
-**EduStats** is a Python project designed to manage and analyze academic data for a BUT RT program. It automates the creation and maintenance of necessary Excel files, calculates averages per teaching unit (UE), and visualizes the results through intuitive graphs. 🔢🔯
-
----
-
-## ✨ Features
-- **📂 Directory and File Validation**: Ensures the required files (`semestre.xlsx`, `notes_RT.xlsx`) exist, creating or updating them if necessary.
-- **📊 Automatic File Management**: Extracts and organizes data from `semestre.xlsx` into `notes_RT.xlsx`.
-- **🔢 Average Calculation**: Computes averages for each UE based on user-provided notes and module coefficients.
-- **🎨 Visual Results**: Displays results in a graph with clear thresholds for success and alerts.
+**EduStats** is an advanced Python project tailored to manage and analyze academic performance for students in the **BUT RT** program. With seamless Excel file handling, precise calculations, and visually intuitive graphs, it provides actionable insights to help track and improve results. 📈🎓  
 
 ---
 
-## 📂 Required Files
-### 1. **`semestre.xlsx`**
-Contains the structure of semesters and their corresponding modules with coefficients.
-### 2. **`notes_RT.xlsx`**
-Generated or updated automatically to allow users to input grades for each module.
+## ✨ **Key Features**
+- **📁 Automated File Management**  
+  - Verifies and organizes academic files (`semestre.xlsx`, `notes_RT.xlsx`) automatically.
+  - Creates or updates the `notes_RT.xlsx` file based on the semester structure.  
+
+- **📊 Weighted Average Calculation**  
+  - Computes averages for each **Teaching Unit (UE)** using module coefficients and user-provided grades.
+
+- **🎨 Dynamic Visualization**  
+  - Generates clear, color-coded graphs with performance thresholds for success, warnings, and failures.
+
+- **🛠 Easy-to-Use Workflow**  
+  - Intuitive setup ensures a smooth experience from file preparation to result visualization.
 
 ---
 
-## 🚀 Installation and Usage
+## 📂 **File Requirements**
 
-### 1️⃣ Prerequisites
-Ensure Python is installed on your system, along with the required libraries.
+### 1️⃣ **`semestre.xlsx`**  
+- Defines the semester structure with module names and coefficients.  
+- Must be placed in the `Stats` folder.  
 
+### 2️⃣ **`notes_RT.xlsx`**  
+- Stores the grades for each module.  
+- Created or updated automatically based on `semestre.xlsx`.
+
+---
+
+## 🚀 **Installation & Usage**
+
+### 1️⃣ **Install Dependencies**
+Ensure Python is installed and required libraries are added:  
 ```bash
 pip install openpyxl matplotlib
 ```
 
-### 2️⃣ Clone the Project
+### 2️⃣ **Clone the Repository**  
 ```bash
 git clone https://github.com/your-username/EduStats.git
 cd EduStats
 ```
 
-### 3️⃣ Place the Files
-Place your `semestre.xlsx` file in the `Stats` folder. The program will handle the rest.
+### 3️⃣ **Prepare Files**  
+- Place `semestre.xlsx` in the `Stats` folder.  
+- The program will create or update `notes_RT.xlsx` for you.  
 
-### 4️⃣ Run the Script
+### 4️⃣ **Run the Program**  
 ```bash
-python script.py
+python main.py
 ```
 
 ---
 
-## 🎨 Graph Overview
+## 🎨 **Graph Overview**
 
-The generated graph visually represents the averages for each UE, using a color-coded system:
-- **✅ Averages >= 10**: Green bars indicate success.
-- **⚠️ Averages between 8 and 10**: Orange bars warn of retakes.
-- **❌ Averages < 8**: Red bars signal failure.
+The output graph highlights performance for each **Teaching Unit (UE)** using a color-coded system:  
+- **✅ Averages ≥ 10**: Green bars indicate success.  
+- **⚠️ Averages between 8 and 10**: Orange bars suggest potential retakes.  
+- **❌ Averages < 8**: Red bars flag failure.  
 
-Threshold lines for 10 (pass) and 8 (retake) are also displayed for clarity.
-
----
-
-## 🤔 How It Works
-
-### 1. **Directory and File Checks**
-- Verifies the existence of the `Stats` directory.
-- Checks for `semestre.xlsx` and ensures `notes_RT.xlsx` is created or updated.
-
-### 2. **Automatic File Management**
-- **File Creation**: Extracts module titles and coefficients from `semestre.xlsx` to initialize `notes_RT.xlsx`.
-- **File Update**: Adds missing modules to `notes_RT.xlsx` if new entries appear in `semestre.xlsx`.
-
-### 3. **Average Calculation**
-- Reads grades and coefficients from `notes_RT.xlsx`.
-- Computes weighted averages for each UE.
-
-### 4. **Graph Display**
-- Displays a bar chart with averages, color-coded by performance thresholds.
+Threshold markers at **10** (pass) and **8** (retake) are included for clarity.
 
 ---
 
-## 🛡️ Troubleshooting
-- Ensure both `semestre.xlsx` and `notes_RT.xlsx` are placed in the `Stats` folder.
-- If files are corrupted or missing, the program will provide guidance or exit gracefully.
+## 🛠️ **How It Works**
+
+### **Step 1: File Verification**  
+- Ensures the `Stats` directory exists.  
+- Verifies the presence of `semestre.xlsx`.  
+- Creates or updates `notes_RT.xlsx` automatically.
+
+### **Step 2: Data Management**  
+- Extracts module names and coefficients from `semestre.xlsx`.  
+- Populates `notes_RT.xlsx` with a user-friendly structure for grade input.  
+
+### **Step 3: Average Calculation**  
+- Computes weighted averages for each **UE**, accounting for module coefficients and grades.
+
+### **Step 4: Visual Results**  
+- Displays a visually intuitive bar chart with performance thresholds and color-coded bars.  
 
 ---
 
-## 🛠 Contributing
+## 💡 **Troubleshooting**
+- **Missing Files**: Ensure `semestre.xlsx` is in the `Stats` folder. If `notes_RT.xlsx` is missing, the program will create it.  
+- **Corrupted Files**: Verify that `semestre.xlsx` and `notes_RT.xlsx` are valid Excel files.  
 
-Contributions are welcome! Feel free to submit issues or pull requests to improve **EduStats**. 🙏
-
----
-
-## 📜 License
-
-This project is open-source and licensed under the **MIT License**. You are free to use, modify, and distribute the software under the terms of the license. Refer to the [LICENSE](./LICENSE) file for more information.
+If issues persist, check the program output for detailed error messages.
 
 ---
 
-🎉 **Enjoy automating your academic data management with EduStats!**
+## 🛡 **Contributing**  
 
+We welcome contributions! 🚀  
+- Report issues or bugs via [GitHub Issues](https://github.com/your-username/EduStats/issues).  
+- Submit improvements as pull requests to enhance functionality.  
+
+---
+
+## 📜 **License**  
+
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute it under the terms of this license. Refer to the [LICENSE](./LICENSE) file for details.
+
+---
+
+🎉 **EduStats simplifies academic data management and empowers you to track your success. Start using it today!** 😊
