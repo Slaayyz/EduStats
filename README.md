@@ -1,54 +1,42 @@
 # 📊 EduStats
 
-**EduStats** is a Python project designed to analyze academic data. It reads a CSV file containing grades and credits, calculates weighted averages by semester, and visualizes the results with colorful, intuitive graphs. 🎨📈  
+**EduStats** is a Python project designed to manage and analyze academic data for a BUT RT program. It automates the creation and maintenance of necessary Excel files, calculates averages per teaching unit (UE), and visualizes the results through intuitive graphs. 🔢🔯
 
 ---
 
 ## ✨ Features
-- **📂 CSV File Parsing**: Automatically imports and processes grade and credit data.
-- **📉 Weighted Average Calculation**: Computes averages considering module coefficients.
-- **🎨 Data Visualization**: Generates intuitive graphs with thresholds for success and alerts.
-- **🗓 Multi-Semester Support**: Seamlessly handles data for multiple semesters.
+- **📂 Directory and File Validation**: Ensures the required files (`semestre.xlsx`, `notes_RT.xlsx`) exist, creating or updating them if necessary.
+- **📊 Automatic File Management**: Extracts and organizes data from `semestre.xlsx` into `notes_RT.xlsx`.
+- **🔢 Average Calculation**: Computes averages for each UE based on user-provided notes and module coefficients.
+- **🎨 Visual Results**: Displays results in a graph with clear thresholds for success and alerts.
 
 ---
 
-## 📂 Example CSV File
-Here’s an example of the `notes.csv` file format:  
-
-```
-S1;UE1;R101;10;12
-S1;UE1;R102;10;20
-S1;UE1;R103;7;13
-S2;UE1;R101;10;12
-...
-```
-
-**Columns**:
-- `S1`: Semester.
-- `UE1`: Teaching Unit.
-- `R101`: Module.
-- `10`: Number of Credits.
-- `12`: Grade Achieved.
+## 📂 Required Files
+### 1. **`semestre.xlsx`**
+Contains the structure of semesters and their corresponding modules with coefficients.
+### 2. **`notes_RT.xlsx`**
+Generated or updated automatically to allow users to input grades for each module.
 
 ---
 
 ## 🚀 Installation and Usage
 
-Follow these steps to set up and run **EduStats**:
+### 1️⃣ Prerequisites
+Ensure Python is installed on your system, along with the required libraries.
 
-### 1️⃣ Clone the Project
+```bash
+pip install openpyxl matplotlib
+```
+
+### 2️⃣ Clone the Project
 ```bash
 git clone https://github.com/your-username/EduStats.git
 cd EduStats
 ```
 
-### 2️⃣ Install Dependencies
-```bash
-pip install matplotlib numpy
-```
-
-### 3️⃣ Add Your Data
-Place a `notes.csv` file in the project directory following the format above.
+### 3️⃣ Place the Files
+Place your `semestre.xlsx` file in the `Stats` folder. The program will handle the rest.
 
 ### 4️⃣ Run the Script
 ```bash
@@ -59,33 +47,51 @@ python script.py
 
 ## 🎨 Graph Overview
 
-The generated graph displays weighted averages for each semester and highlights key thresholds:  
-- **✅ Averages >= 10**: Green bars indicate success.  
-- **⚠️ Averages between 8 and 10**: Orange bars serve as a warning.  
-- **❌ Averages < 8**: Red bars signal failure.  
+The generated graph visually represents the averages for each UE, using a color-coded system:
+- **✅ Averages >= 10**: Green bars indicate success.
+- **⚠️ Averages between 8 and 10**: Orange bars warn of retakes.
+- **❌ Averages < 8**: Red bars signal failure.
+
+Threshold lines for 10 (pass) and 8 (retake) are also displayed for clarity.
 
 ---
 
 ## 🤔 How It Works
-1. **Data Parsing**: Reads and processes the `notes.csv` file to extract semester data.  
-2. **Weighted Averages**: Calculates averages using grades and their respective credit weights.  
-3. **Visualization**: Displays results in a user-friendly graph, highlighting performance thresholds.  
+
+### 1. **Directory and File Checks**
+- Verifies the existence of the `Stats` directory.
+- Checks for `semestre.xlsx` and ensures `notes_RT.xlsx` is created or updated.
+
+### 2. **Automatic File Management**
+- **File Creation**: Extracts module titles and coefficients from `semestre.xlsx` to initialize `notes_RT.xlsx`.
+- **File Update**: Adds missing modules to `notes_RT.xlsx` if new entries appear in `semestre.xlsx`.
+
+### 3. **Average Calculation**
+- Reads grades and coefficients from `notes_RT.xlsx`.
+- Computes weighted averages for each UE.
+
+### 4. **Graph Display**
+- Displays a bar chart with averages, color-coded by performance thresholds.
 
 ---
 
-## 🛡 Contributing
-
-Contributions are always welcome! If you have ideas or improvements, feel free to open an issue or submit a pull request. 🙌  
+## 🛡️ Troubleshooting
+- Ensure both `semestre.xlsx` and `notes_RT.xlsx` are placed in the `Stats` folder.
+- If files are corrupted or missing, the program will provide guidance or exit gracefully.
 
 ---
 
-## 📜 **License**  
+## 🛠 Contributing
 
-This project is open-source and licensed under the **MIT License**. 📄  
-You are free to use, modify, and distribute the software under the terms of the license.  
+Contributions are welcome! Feel free to submit issues or pull requests to improve **EduStats**. 🙏
 
-For more information, refer to the [LICENSE](./LICENSE) file.  
+---
 
----  
+## 📜 License
 
-🎉 **Enjoy customizing and using EduStats!**  
+This project is open-source and licensed under the **MIT License**. You are free to use, modify, and distribute the software under the terms of the license. Refer to the [LICENSE](./LICENSE) file for more information.
+
+---
+
+🎉 **Enjoy automating your academic data management with EduStats!**
+
