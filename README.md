@@ -1,33 +1,38 @@
 # 📊 **EduStats: Academic Performance Analyzer**
 
-**EduStats** is an advanced Python project tailored to manage and analyze academic performance for students in the **BUT RT** program. With seamless Excel file handling, precise calculations, and visually intuitive graphs, it provides actionable insights to help track and improve results. 📈🎓  
+**EduStats** is an advanced Python project tailored to manage and analyze academic performance for students in the **BUT RT** program. With seamless Excel file handling, precise calculations, robust data validation, and visually intuitive graphs, it provides actionable insights to help track and improve results. 📈🎓  
 
 ---
 
 ## ✨ **Key Features**
-- **📁 Automated File Management**  
-  - Verifies and organizes academic files (`semestre.xlsx`, `notes_RT.xlsx`) automatically.
-  - Creates or updates the `notes_RT.xlsx` file based on the semester structure.  
 
-- **📊 Weighted Average Calculation**  
-  - Computes averages for each **Teaching Unit (UE)** using module coefficients and user-provided grades.
+### **📁 Automated File Management**
+- Verifies and organizes academic files (`semestre.xlsx`, `notes_RT.xlsx`) automatically.
+- Creates or updates the `notes_RT.xlsx` file based on the semester structure.
 
-- **🎨 Dynamic Visualization**  
-  - Generates clear, color-coded graphs with performance thresholds for success, warnings, and failures.
+### **✅ Enhanced Data Validation**
+- Checks for sufficient rows and columns in Excel files to ensure accurate processing.
+- Logs warnings and errors to help identify and resolve data issues efficiently.
 
-- **🛠 Easy-to-Use Workflow**  
-  - Intuitive setup ensures a smooth experience from file preparation to result visualization.
+### **📊 Weighted Average Calculation**
+- Computes averages for each **Teaching Unit (UE)** using module coefficients and user-provided grades.
+
+### **🎨 Dynamic Visualization**
+- Generates clear, color-coded graphs with performance thresholds for success, warnings, and failures.
+
+### **🚀 Optimized Performance**
+- Reduces repetitive data access and improves overall execution efficiency.
 
 ---
 
 ## 📂 **File Requirements**
 
-### 1️⃣ **`semestre.xlsx`**  
-- Defines the semester structure with module names and coefficients.  
-- Must be placed in the `Stats` folder.  
+### 1️⃣ **`semestre.xlsx`**
+- Defines the semester structure with module names and coefficients.
+- Must be placed in the `Stats` folder.
 
-### 2️⃣ **`notes_RT.xlsx`**  
-- Stores the grades for each module.  
+### 2️⃣ **`notes_RT.xlsx`**
+- Stores the grades for each module.
 - Created or updated automatically based on `semestre.xlsx`.
 
 ---
@@ -46,9 +51,9 @@ git clone https://github.com/your-username/EduStats.git
 cd EduStats
 ```
 
-### 3️⃣ **Prepare Files**  
-- Place `semestre.xlsx` in the `Stats` folder.  
-- The program will create or update `notes_RT.xlsx` for you.  
+### 3️⃣ **Prepare Files**
+- Place `semestre.xlsx` in the `Stats` folder.
+- The program will create or update `notes_RT.xlsx` for you.
 
 ### 4️⃣ **Run the Program**  
 ```bash
@@ -70,26 +75,35 @@ Threshold markers at **10** (pass) and **8** (retake) are included for clarity.
 
 ## 🛠️ **How It Works**
 
-### **Step 1: File Verification**  
-- Ensures the `Stats` directory exists.  
-- Verifies the presence of `semestre.xlsx`.  
+### **Step 1: File Verification**
+- Ensures the `Stats` directory exists.
+- Verifies the presence of `semestre.xlsx`.
 - Creates or updates `notes_RT.xlsx` automatically.
 
-### **Step 2: Data Management**  
-- Extracts module names and coefficients from `semestre.xlsx`.  
-- Populates `notes_RT.xlsx` with a user-friendly structure for grade input.  
+### **Step 2: Data Management**
+- Extracts module names and coefficients from `semestre.xlsx`.
+- Populates `notes_RT.xlsx` with a user-friendly structure for grade input.
 
-### **Step 3: Average Calculation**  
+### **Step 3: Data Validation**
+- Validates Excel sheets for sufficient data before proceeding.
+- Logs any discrepancies or missing information for user awareness.
+
+### **Step 4: Average Calculation**
 - Computes weighted averages for each **UE**, accounting for module coefficients and grades.
 
-### **Step 4: Visual Results**  
-- Displays a visually intuitive bar chart with performance thresholds and color-coded bars.  
+### **Step 5: Visual Results**
+- Displays a visually intuitive bar chart with performance thresholds and color-coded bars.
 
 ---
 
 ## 💡 **Troubleshooting**
-- **Missing Files**: Ensure `semestre.xlsx` is in the `Stats` folder. If `notes_RT.xlsx` is missing, the program will create it.  
-- **Corrupted Files**: Verify that `semestre.xlsx` and `notes_RT.xlsx` are valid Excel files.  
+
+### Common Issues
+- **Missing Files**: Ensure `semestre.xlsx` is in the `Stats` folder. If `notes_RT.xlsx` is missing, the program will create it.
+- **Corrupted Files**: Verify that `semestre.xlsx` and `notes_RT.xlsx` are valid Excel files.
+
+### Debugging Tools
+- Detailed logging output helps identify and resolve issues efficiently.
 
 If issues persist, check the program output for detailed error messages.
 
