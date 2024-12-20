@@ -1,39 +1,48 @@
 import os
 import openpyxl
-import matplotlib.pyplot as plt
+import logging
 from openpyxl.utils.exceptions import InvalidFileException
+from matplotlib import pyplot as plt
+
+# Constants
+STATS_DIR = 'Stats'
+SEMESTRE_FILE = 'semestre.xlsx'
+NOTES_FILE = 'notes_RT.xlsx'
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Checks if the 'Stats' folder exists
 def check_directory():
     try:
-        if not os.path.exists('Stats'):
-            print("The 'Stats' folder does not exist.")
+        if not os.path.exists(STATS_DIR):
+            logging.error("The 'Stats' folder does not exist.")
             exit()
-        os.chdir('Stats')
+        os.chdir(STATS_DIR)
     except Exception as e:
-        print(f"Error accessing the 'Stats' folder: {e}")
+        logging.error(f"Error accessing the '{STATS_DIR}' folder: {e}")
         exit()
 
 # Checks if the necessary files exist or creates 'notes_RT.xlsx'
 def check_or_create_files():
     try:
-        if not os.path.exists('semestre.xlsx'):
-            print("The file 'semestre.xlsx' is not in the 'Stats' folder.")
+        if not os.path.exists(SEMESTRE_FILE):
+            logging.error(f"The file '{SEMESTRE_FILE}' is not in the '{STATS_DIR}' folder.")
             exit()
 
-        if not os.path.exists('notes_RT.xlsx'):
-            print("The file 'notes_RT.xlsx' is missing. Creating it now...")
+        if not os.path.exists(NOTES_FILE):
+            logging.info(f"The file '{NOTES_FILE}' is missing. Creating it now...")
             create_notes_file()
         else:
             update_notes_file()
     except Exception as e:
-        print(f"Error checking or creating files: {e}")
+        logging.error(f"Error checking or creating files: {e}")
         exit()
 
 # Creates the 'notes_RT.xlsx' file with a basic structure extracted from 'semestre.xlsx'
 def create_notes_file():
     try:
-        wb_semestre = openpyxl.load_workbook('semestre.xlsx', data_only=True, read_only=True)
+        wb_semestre = openpyxl.load_workbook(SEMESTRE_FILE, data_only=True, read_only=True)
         wb_notes = openpyxl.Workbook()
 
         for sheet_name in wb_semestre.sheetnames:
@@ -49,22 +58,22 @@ def create_notes_file():
         if 'Sheet' in wb_notes.sheetnames:
             del wb_notes['Sheet']
 
-        wb_notes.save('notes_RT.xlsx')
+        wb_notes.save(NOTES_FILE)
         wb_notes.close()
         wb_semestre.close()
-        print("The file 'notes_RT.xlsx' was successfully created.")
+        logging.info(f"The file '{NOTES_FILE}' was successfully created.")
     except InvalidFileException:
-        print("Error: 'semestre.xlsx' is corrupted or invalid.")
+        logging.error(f"Error: '{SEMESTRE_FILE}' is corrupted or invalid.")
         exit()
     except Exception as e:
-        print(f"Error creating 'notes_RT.xlsx': {e}")
+        logging.error(f"Error creating '{NOTES_FILE}': {e}")
         exit()
 
 # Updates the 'notes_RT.xlsx' file if changes were made to 'semestre.xlsx'
 def update_notes_file():
     try:
-        wb_semestre = openpyxl.load_workbook('semestre.xlsx', data_only=True, read_only=True)
-        wb_notes = openpyxl.load_workbook('notes_RT.xlsx')
+        wb_semestre = openpyxl.load_workbook(SEMESTRE_FILE, data_only=True, read_only=True)
+        wb_notes = openpyxl.load_workbook(NOTES_FILE)
 
         for sheet_name in wb_semestre.sheetnames:
             sheet = wb_semestre[sheet_name]
@@ -81,28 +90,28 @@ def update_notes_file():
                 if title and isinstance(title, str) and title not in existing_titles:
                     ws_notes.append([title])
 
-        wb_notes.save('notes_RT.xlsx')
+        wb_notes.save(NOTES_FILE)
         wb_notes.close()
         wb_semestre.close()
-        print("The file 'notes_RT.xlsx' was successfully updated.")
+        logging.info(f"The file '{NOTES_FILE}' was successfully updated.")
     except InvalidFileException:
-        print("Error: 'semestre.xlsx' or 'notes_RT.xlsx' is corrupted or invalid.")
+        logging.error(f"Error: '{SEMESTRE_FILE}' or '{NOTES_FILE}' is corrupted or invalid.")
         exit()
     except Exception as e:
-        print(f"Error updating 'notes_RT.xlsx': {e}")
+        logging.error(f"Error updating '{NOTES_FILE}': {e}")
         exit()
 
 # Loads the Excel files at once and reads all data
 def load_workbooks():
     try:
-        wb_file = openpyxl.load_workbook('semestre.xlsx', data_only=True, read_only=True)
-        wb_note = openpyxl.load_workbook('notes_RT.xlsx', data_only=True, read_only=True)
+        wb_file = openpyxl.load_workbook(SEMESTRE_FILE, data_only=True, read_only=True)
+        wb_note = openpyxl.load_workbook(NOTES_FILE, data_only=True, read_only=True)
         return wb_file, wb_note
     except InvalidFileException:
-        print("Error: One of the Excel files is corrupted or invalid.")
+        logging.error("Error: One of the Excel files is corrupted or invalid.")
         exit()
     except Exception as e:
-        print(f"Error loading the Excel files: {e}")
+        logging.error(f"Error loading the Excel files: {e}")
         exit()
 
 # Calculates the average per UE (optimized)
@@ -112,15 +121,14 @@ def calculate_averages(wb_file, wb_note):
         notes_dict = {}
 
         for sheet_name in wb_note.sheetnames:
-            sheet_notes = wb_note[sheet_name]  # Retrieve the corresponding notes sheet
+            sheet_notes = wb_note[sheet_name]
 
-            # Prepare a dictionary of notes by Title
-            for row in range(2, sheet_notes.max_row + 1):  # Skip the header row
+            for row in range(2, sheet_notes.max_row + 1):
                 title = str(sheet_notes.cell(row=row, column=1).value)
                 notes_dict[title] = []
                 for col in range(2, sheet_notes.max_column + 1):
                     note = sheet_notes.cell(row=row, column=col).value
-                    if isinstance(note, (int, float)):  # Keep only numerical notes
+                    if isinstance(note, (int, float)):
                         notes_dict[title].append(note)
 
         for sheet_name in wb_file.sheetnames:
@@ -131,7 +139,6 @@ def calculate_averages(wb_file, wb_note):
                     if cell.value and cell.data_type == 's' and cell.value.startswith('UE'):
                         UE = cell.value
                         UEden, UEnom = 0, 0
-                        # Read column data once to avoid multiple iterations
                         for i in range(3, sheet_file.max_row + 1):
                             coefficient = sheet_file.cell(row=i, column=col).value
                             title = str(sheet_file.cell(row=i, column=1).value)
@@ -143,7 +150,7 @@ def calculate_averages(wb_file, wb_note):
                             UE_S.append((UE, UEnom / UEden))
         return UE_S
     except Exception as e:
-        print(f"Error calculating averages: {e}")
+        logging.error(f"Error calculating averages: {e}")
         return []
 
 # Function to display the graph
@@ -160,11 +167,11 @@ def plot_results(values):
         plt.legend()
         plt.show()
     except Exception as e:
-        print(f"Error generating the graph: {e}")
+        logging.error(f"Error generating the graph: {e}")
 
 # Main function
 def main():
-    print("Current directory:", os.getcwd())
+    logging.info(f"Current directory: {os.getcwd()}")
     check_directory()
     check_or_create_files()
 
@@ -173,7 +180,7 @@ def main():
     if UE_averages:
         plot_results(UE_averages)
     else:
-        print("No averages calculated. Check your files.")
+        logging.info("No averages calculated. Check your files.")
 
     wb_file.close()
     wb_note.close()
