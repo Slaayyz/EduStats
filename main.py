@@ -7,7 +7,7 @@ import logging
 from openpyxl.utils.exceptions import InvalidFileException
 
 # Constants
-STATS_FOLDER = 'Stats'
+STATS_FOLDER = 'stats'
 SEMESTER_FILE = 'semester.xlsx'
 NOTES_FILE = 'notes_RT.xlsx'
 
